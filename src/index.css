@@ -1,17 +1,30 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  background: 
-    radial-gradient(circle at 0% 0%, rgba(45, 76, 255, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 100% 0%, rgba(255, 45, 162, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 100% 100%, rgba(45, 255, 196, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 0% 100%, rgba(255, 168, 45, 0.1) 0%, transparent 50%),
+  background: radial-gradient(
+      circle at 0% 0%,
+      rgba(45, 76, 255, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(255, 45, 162, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 100% 100%,
+      rgba(45, 255, 196, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 0% 100%,
+      rgba(255, 168, 45, 0.1) 0%,
+      transparent 50%
+    ),
     linear-gradient(180deg, #0a0f1c 0%, #1a1f2c 100%);
   @apply text-white min-h-screen;
   background-attachment: fixed;
@@ -123,12 +136,12 @@ body {
 /* Effets de survol élégants */
 .hover-card {
   @apply transition-all duration-500 ease-out;
-  background: linear-gradient(145deg, 
+  background: linear-gradient(
+    145deg,
     rgba(255, 255, 255, 0.05) 0%,
     rgba(255, 255, 255, 0.02) 100%
   );
-  box-shadow: 
-    0 4px 15px rgba(0, 0, 0, 0.1),
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1),
     inset 0 0 0 1px rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   transform-style: preserve-3d;
@@ -136,15 +149,11 @@ body {
 }
 
 .hover-card:hover {
-  transform: 
-    translateY(-5px) 
-    rotateX(5deg) 
-    rotateY(5deg) 
-    scale(1.02);
-  box-shadow: 
-    0 20px 40px rgba(59, 130, 246, 0.2),
+  transform: translateY(-5px) rotateX(5deg) rotateY(5deg) scale(1.02);
+  box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2),
     inset 0 0 0 2px rgba(59, 130, 246, 0.2);
-  background: linear-gradient(145deg,
+  background: linear-gradient(
+    145deg,
     rgba(255, 255, 255, 0.1) 0%,
     rgba(255, 255, 255, 0.05) 100%
   );
@@ -155,15 +164,13 @@ body {
   @apply w-full bg-gray-800/30 border border-gray-700/50 rounded-lg px-4 py-3 text-white placeholder-gray-400
          focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent
          transition-all duration-300 backdrop-blur-sm transform-gpu;
-  box-shadow: 
-    0 2px 4px rgba(0, 0, 0, 0.1),
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1),
     inset 0 2px 4px rgba(255, 255, 255, 0.1);
 }
 
 .input-style:focus {
   transform: translateY(-2px);
-  box-shadow: 
-    0 4px 8px rgba(59, 130, 246, 0.2),
+  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.2),
     inset 0 2px 4px rgba(255, 255, 255, 0.1);
 }
 
@@ -174,17 +181,13 @@ body {
   background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
   transform-style: preserve-3d;
   transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-  box-shadow: 
-    0 4px 12px rgba(59, 130, 246, 0.3),
-    0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .button-style:hover {
   transform: translateY(-2px) scale(1.02);
   background: linear-gradient(135deg, #4f46e5 0%, #60a5fa 100%);
-  box-shadow: 
-    0 8px 20px rgba(59, 130, 246, 0.4),
-    0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4), 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .button-style:active {
@@ -194,18 +197,18 @@ body {
 /* Effet de glassmorphism amélioré pour les sections */
 .glass-section {
   @apply backdrop-blur-xl rounded-2xl shadow-2xl border border-white/10;
-  background: linear-gradient(135deg,
+  background: linear-gradient(
+    135deg,
     rgba(255, 255, 255, 0.05) 0%,
     rgba(255, 255, 255, 0.02) 100%
   );
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.2),
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2),
     inset 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
 /* Animation du texte de titre avec effet 3D */
 .title-gradient {
-  @apply bg-clip-text text-transparent animate-gradient;
+  @apply bg-clip-text text-transparent;
   background-image: linear-gradient(
     135deg,
     #60a5fa 0%,
@@ -219,9 +222,15 @@ body {
 }
 
 @keyframes gradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .animate-gradient {
@@ -232,18 +241,17 @@ body {
 /* Certificate Card Styles */
 .certificate-card {
   @apply p-6 rounded-lg transition-all duration-300;
-  background: linear-gradient(145deg,
+  background: linear-gradient(
+    145deg,
     rgba(255, 255, 255, 0.08) 0%,
     rgba(255, 255, 255, 0.03) 100%
   );
-  box-shadow: 
-    0 4px 15px rgba(0, 0, 0, 0.1),
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1),
     inset 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
 .certificate-card:hover {
   transform: translateY(-5px);
-  box-shadow: 
-    0 8px 25px rgba(59, 130, 246, 0.2),
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.2),
     inset 0 0 0 2px rgba(59, 130, 246, 0.2);
 }
