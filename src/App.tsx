@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TypeAnimation } from 'react-type-animation';
-import { Github, Linkedin, Code2, Database, Server, Shield, Trello, BookOpen, FileText, Send, Mail, Phone, MapPin, Download } from 'lucide-react';
-
+import { Github, Linkedin, Code2, Database, Server, Shield, Trello, BookOpen, FileText, Send, Mail, Phone, MapPin, Download, ExternalLink, FileSpreadsheet } from 'lucide-react';
+import myPhoto from './assets/my-photo.jpg';
 function App() {
   const [formData, setFormData] = useState({
     name: '',
@@ -9,14 +9,9 @@ function App() {
     message: ''
   });
 
-  const [flippedCards, setFlippedCards] = useState<{ [key: string]: boolean }>({});
-
-  const handleFlip = (id: string) => {
-    setFlippedCards(prev => ({
-      ...prev,
-      [id]: !prev[id]
-    }));
-  };
+  const [selectedProject, setSelectedProject] = useState<string | null>(null);
+  const [selectedNews, setSelectedNews] = useState<string | null>(null);
+  const [selectedStage, setSelectedStage] = useState<string | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,7 +37,8 @@ function App() {
       description: "AP en groupe : Planifier les activités, Réaliser les tests d'intégration et d'acceptation, Déployer un service",
       icon: <Server className="w-6 h-6" />,
       image: "https://images.unsplash.com/photo-1541560052-77ec1bbc09f7?auto=format&fit=crop&w=800&q=80",
-      details: "Projet de groupe axé sur la Formule 1 comprenant:\n- Développement d'une API REST\n- Tests d'intégration complets\n- Déploiement automatisé\n- Gestion de base de données"
+      details: "Projet de groupe axé sur la Formule 1 comprenant:\n- Développement d'une API REST\n- Tests d'intégration complets\n- Déploiement automatisé\n- Gestion de base de données",
+      excelFile: "/files/f1nfos-details.xlsx"
     },
     {
       id: "linkedin",
@@ -50,7 +46,8 @@ function App() {
       description: "Gérer son identité professionnelle",
       icon: <Linkedin className="w-6 h-6" />,
       image: "https://images.unsplash.com/photo-1611944212129-29977ae1398c?auto=format&fit=crop&w=800&q=80",
-      details: "Création et maintenance d'un profil professionnel:\n- Optimisation SEO\n- Networking actif\n- Partage de contenu professionnel\n- Veille technologique"
+      details: "Création et maintenance d'un profil professionnel:\n- Optimisation SEO\n- Networking actif\n- Partage de contenu professionnel\n- Veille technologique",
+      excelFile: "/files/linkedin-analytics.xlsx"
     },
     {
       id: "cybernews",
@@ -58,7 +55,8 @@ function App() {
       description: "Participer à l'évolution d'un site Web, Veille informationnelle",
       icon: <Shield className="w-6 h-6" />,
       image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80",
-      details: "Plateforme de veille en cybersécurité:\n- Agrégation de news\n- Analyse de tendances\n- Reporting hebdomadaire\n- Recommandations de sécurité"
+      details: "Plateforme de veille en cybersécurité:\n- Agrégation de news\n- Analyse de tendances\n- Reporting hebdomadaire\n- Recommandations de sécurité",
+      excelFile: "/files/cybernews-stats.xlsx"
     },
     {
       id: "gsk",
@@ -66,7 +64,8 @@ function App() {
       description: "Planifier les activités, Collecter et suivre des demandes",
       icon: <Trello className="w-6 h-6" />,
       image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80",
-      details: "Gestion de projet en équipe:\n- Organisation des tâches\n- Suivi des demandes\n- Collaboration d'équipe\n- Reporting régulier"
+      details: "Gestion de projet en équipe:\n- Organisation des tâches\n- Suivi des demandes\n- Collaboration d'équipe\n- Reporting régulier",
+      excelFile: "/files/gsk-project.xlsx"
     },
     {
       id: "portfolio",
@@ -74,31 +73,138 @@ function App() {
       description: "Exploiter des référentiels, normes et standards",
       icon: <Code2 className="w-6 h-6" />,
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
-      details: "Création d'un portfolio professionnel:\n- Design moderne\n- Responsive design\n- Animations fluides\n- SEO optimisé"
+      details: "Création d'un portfolio professionnel:\n- Design moderne\n- Responsive design\n- Animations fluides\n- SEO optimisé",
+      excelFile: "/files/portfolio-metrics.xlsx"
     },
     {
       id: "stage",
-      title: "Stage ABECEDAIRE",
+      title: "Stage ABÉCÉDAIRE",
       description: "Stage avec rapport téléchargeable",
       icon: <FileText className="w-6 h-6" />,
       image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80",
-      details: "Stage en entreprise:\n- Développement web\n- API NodeJS\n- Maquettage Figma\n- Scraping de données"
+      details: "Stage en entreprise:\n- Développement web\n- API NodeJS\n- Maquettage Figma\n- Scraping de données",
+      excelFile: "/files/stage-report.xlsx"
     }
   ];
 
   const news = [
-    { title: "Entrainement des unités d'élites", category: "Défense" },
-    { title: "Améliorer la santé", category: "Santé" },
-    { title: "Alzheimer et réalité virtuelle", category: "Santé" },
-    { title: "Projet \"TARGET\" pour former les policiers", category: "Défense" },
-    { title: "Technologies immersives et Défense", category: "Défense" },
-    { title: "La réalité virtuelle contre la dépression", category: "Santé" },
-    { title: "Révolutionner la rééducation par la réalité virtuelle", category: "Santé" },
-    { title: "Projet ORCHESTRAA : formation militaire via VR", category: "Défense" },
-    { title: "Expérimentation de la VR par l'armée de Terre", category: "Défense" },
-    { title: "Innovations pour améliorer la vie des seniors", category: "Santé" },
-    { title: "Utilisation de la VR dans les hôpitaux", category: "Santé" },
-    { title: "La VR comme arme de guerre potentielle", category: "Défense" }
+    { 
+      id: "news1",
+      title: "Entrainement des unités d'élites", 
+      category: "Défense",
+      image: "https://images.unsplash.com/photo-1624705002806-5d72df19c3ad?auto=format&fit=crop&w=800&q=80",
+      details: "Les unités d'élite utilisent désormais la réalité virtuelle pour s'entraîner dans des environnements simulés ultra-réalistes.",
+      downloadUrl: "/files/defense-training.pdf"
+    },
+    { 
+      id: "news2",
+      title: "Améliorer la santé", 
+      category: "Santé",
+      image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80",
+      details: "La réalité virtuelle révolutionne le domaine de la santé en offrant de nouvelles approches thérapeutiques.",
+      downloadUrl: "/files/health-vr.pdf"
+    },
+    { 
+      id: "news3",
+      title: "Alzheimer et réalité virtuelle", 
+      category: "Santé",
+      image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=800&q=80",
+      details: "Des chercheurs utilisent la VR pour aider les patients atteints d'Alzheimer à stimuler leur mémoire.",
+      downloadUrl: "/files/alzheimer-study.pdf"
+    },
+    {
+      id: "news4",
+      title: "Projet \"TARGET\" pour former les policiers",
+      category: "Défense",
+      image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80",
+      details: "Programme innovant utilisant la VR pour l'entraînement des forces de l'ordre.",
+      downloadUrl: "/files/target-project.pdf"
+    },
+    {
+      id: "news5",
+      title: "Technologies immersives et Défense",
+      category: "Défense",
+      image: "https://images.unsplash.com/photo-1580894894513-541e068a3e2b?auto=format&fit=crop&w=800&q=80",
+      details: "L'armée adopte massivement les technologies immersives pour la formation.",
+      downloadUrl: "/files/defense-tech.pdf"
+    },
+    {
+      id: "news6",
+      title: "La réalité virtuelle contre la dépression",
+      category: "Santé",
+      image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80",
+      details: "Nouvelles thérapies utilisant la VR pour traiter la dépression.",
+      downloadUrl: "/files/depression-vr.pdf"
+    },
+    {
+      id: "news7",
+      title: "Révolutionner la rééducation",
+      category: "Santé",
+      image: "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?auto=format&fit=crop&w=800&q=80",
+      details: "La VR transforme les approches de rééducation physique.",
+      downloadUrl: "/files/rehabilitation-vr.pdf"
+    },
+    {
+      id: "news8",
+      title: "Projet ORCHESTRAA",
+      category: "Défense",
+      image: "https://images.unsplash.com/photo-1542744094-24638eff58bb?auto=format&fit=crop&w=800&q=80",
+      details: "Formation militaire avancée utilisant la réalité virtuelle.",
+      downloadUrl: "/files/orchestraa.pdf"
+    },
+    {
+      id: "news9",
+      title: "VR dans l'armée de Terre",
+      category: "Défense",
+      image: "https://images.unsplash.com/photo-1547547856-ee82879f9f0d?auto=format&fit=crop&w=800&q=80",
+      details: "L'armée de Terre expérimente la VR pour l'entraînement au combat.",
+      downloadUrl: "/files/army-vr.pdf"
+    },
+    {
+      id: "news10",
+      title: "Innovations pour les seniors",
+      category: "Santé",
+      image: "https://images.unsplash.com/photo-1574708867932-40b4a76591ca?auto=format&fit=crop&w=800&q=80",
+      details: "La VR améliore la qualité de vie des personnes âgées.",
+      downloadUrl: "/files/senior-vr.pdf"
+    },
+    {
+      id: "news11",
+      title: "VR dans les hôpitaux",
+      category: "Santé",
+      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80",
+      details: "Les hôpitaux adoptent la VR pour la formation et les soins.",
+      downloadUrl: "/files/hospital-vr.pdf"
+    },
+    {
+      id: "news12",
+      title: "VR comme technologie militaire",
+      category: "Défense",
+      image: "https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&w=800&q=80",
+      details: "Potentiel de la VR dans les applications militaires avancées.",
+      downloadUrl: "/files/military-vr.pdf"
+    }
+  ];
+
+  const stages = [
+    {
+      id: "stage1",
+      title: "Stage ABÉCÉDAIRE - 1ère année",
+      period: "Mai - Juin 2024",
+      image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80",
+      details: "Stage effectué chez ABÉCÉDAIRE:\n- Développement d'une API NodeJS\n- Création de maquettes Figma\n- Mise en place d'un système de scraping\n- Déploiement d'applications web",
+      downloadUrl: "/files/src/public/files/MMO_RapportDeStageMathieuFinal3 (2).docx",
+      attestationUrl: "/files/src/public/files/attestation-stage.odt"
+    },
+    {
+      id: "stage2",
+      title: "Stage GOTO IA - 2ème année",
+      period: "Janvier - Février 2025",
+      image: "https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?auto=format&fit=crop&w=800&q=80",
+      details: "Stage effectué chez GOTO IA:\n- Développement en Symfony\n- Requête asynchrone en Ajax\n- Ajout de plusieurs formulaire\n- Code React pour afficher l'arborescence des fichiers",
+      downloadUrl: "/files/src/public/files/MMO_RapportDeStageMathieuFinal (4).odt",
+      attestationUrl: "/filessrc/public/files/AttestationDeStage2.jpg"
+    }
   ];
 
   return (
@@ -110,8 +216,8 @@ function App() {
             <li><a href="#home" className="hover:text-blue-400 transition-colors duration-300">Accueil</a></li>
             <li><a href="#skills" className="hover:text-blue-400 transition-colors duration-300">Compétences</a></li>
             <li><a href="#education" className="hover:text-blue-400 transition-colors duration-300">Formation</a></li>
+            <li><a href="#stages" className="hover:text-blue-400 transition-colors duration-300">Stages</a></li>
             <li><a href="#projects" className="hover:text-blue-400 transition-colors duration-300">Réalisations</a></li>
-            <li><a href="#certificates" className="hover:text-blue-400 transition-colors duration-300">Attestations</a></li>
             <li><a href="#news" className="hover:text-blue-400 transition-colors duration-300">Actualités VR</a></li>
             <li><a href="#contact" className="hover:text-blue-400 transition-colors duration-300">Contact</a></li>
           </ul>
@@ -130,12 +236,11 @@ function App() {
               <span>J'aime pratiquer </span>
               <TypeAnimation
                 sequence={[
-                  'La voile',
-                  2000,
                   'le football',
                   2000,
-                  'Le judo',
-                  
+                  'la voile',
+                  2000,
+                  'le judo',
                   2000
                 ]}
                 wrapper="span"
@@ -145,11 +250,11 @@ function App() {
             </div>
           </div>
           <div className="shrink-0">
-            <img
-              src="https://mail.google.com/mail/u/0?ui=2&ik=7573d135ef&attid=0.1&permmsgid=msg-a:r-4486465471538410222&th=195af8f4deaa2811&view=att&disp=safe&realattid=195af8f40ac50f1d7f01&zw"
-              alt="Profile"
-              className="profile-image"
-            />
+            <img 
+  src={myPhoto} 
+  alt="Profile" 
+  className="profile-image"
+/>
           </div>
         </div>
       </section>
@@ -186,11 +291,7 @@ function App() {
               <p className="text-gray-300">2023-2025 | Lycée La Châtaigneraie, Mesnil-Esnard</p>
             </div>
             <div className="hover-card p-6 animate-fadeInUp" style={{ animationDelay: '0.1s' }}>
-              <h3 className="text-xl font-semibold mb-2">GOTO IA</h3>
-              <p className="text-gray-300">202 | Symfony, React, JavaScript, AJAX, Maquette Figma</p>
-            </div>
-            <div className="hover-card p-6 animate-fadeInUp" style={{ animationDelay: '0.1s' }}>
-              <h3 className="text-xl font-semibold mb-2">ABECEDAIRE</h3>
+              <h3 className="text-xl font-semibold mb-2">ABÉCÉDAIRE</h3>
               <p className="text-gray-300">2024 | Scraping, Portfolio, Déploiement, API NodeJS, Maquette Figma</p>
             </div>
             <div className="hover-card p-6 animate-fadeInUp" style={{ animationDelay: '0.2s' }}>
@@ -201,34 +302,54 @@ function App() {
         </div>
       </section>
 
-      {/* Projects Section with Flip Cards */}
-      <section id="projects" className="py-20 glass-section my-10">
+      {/* Stages Section */}
+      <section id="stages" className="py-20 glass-section my-10">
         <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold mb-12 text-center title-gradient">Réalisations professionnelles</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
-              <div
-                key={project.id}
-                className={`flip-card ${flippedCards[project.id] ? 'flipped' : ''}`}
-                onClick={() => handleFlip(project.id)}
-              >
-                <div className="flip-card-inner">
-                  <div className="flip-card-front hover-card">
-                    <img src={project.image} alt={project.title} className="flip-card-image" />
-                    <div className="p-6 flex-1 flex flex-col justify-between">
-                      <div>
-                        <div className="text-blue-400 mb-4">{project.icon}</div>
-                        <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                        <p className="text-gray-300">{project.description}</p>
-                      </div>
-                    </div>
+          <h2 className="text-3xl font-bold mb-12 text-center title-gradient">Stages</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {stages.map((stage) => (
+              <div key={stage.id} className="hover-card overflow-hidden rounded-lg">
+                <img 
+                  src={stage.image} 
+                  alt={stage.title} 
+                  className="w-full h-48 object-cover"
+                />
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold mb-2">{stage.title}</h3>
+                  <p className="text-gray-300 mb-4">Période : {stage.period}</p>
+                  <div className={`${selectedStage === stage.id ? 'block' : 'hidden'}`}>
+                    <p className="text-gray-300 whitespace-pre-line mb-4">{stage.details}</p>
                   </div>
-                  <div className="flip-card-back hover-card p-6">
-                    <h3 className="text-xl font-semibold mb-4 text-blue-400">Détails du projet</h3>
-                    <p className="text-gray-300 whitespace-pre-line flex-1">{project.details}</p>
-                    <button className="button-style mt-4">
-                      En savoir plus
+                  <div className="flex justify-between items-center flex-wrap gap-4">
+                    <button 
+                      onClick={() => setSelectedStage(selectedStage === stage.id ? null : stage.id)}
+                      className="text-blue-400 hover:text-blue-300 transition-colors flex items-center"
+                    >
+                      {selectedStage === stage.id ? 'Voir moins' : 'Voir plus'}
+                      <ExternalLink className="w-4 h-4 ml-2" />
                     </button>
+                    <div className="flex gap-2">
+                      {stage.downloadUrl && (
+                        <a 
+                          href={stage.downloadUrl}
+                          download
+                          className="button-style flex items-center px-4 py-2"
+                        >
+                          <Download className="w-5 h-5 mr-2" />
+                          Rapport
+                        </a>
+                      )}
+                      {stage.attestationUrl && (
+                        <a 
+                          href={stage.attestationUrl}
+                          download
+                          className="button-style flex items-center px-4 py-2"
+                        >
+                          <FileText className="w-5 h-5 mr-2" />
+                          Attestation
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -237,47 +358,99 @@ function App() {
         </div>
       </section>
 
-      {/* Certificates Section */}
-      <section id="certificates" className="py-20">
+      {/* Projects Section */}
+      <section id="projects" className="py-20">
         <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold mb-12 text-center title-gradient">Attestations de Stage</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="certificate-card">
-              <h3 className="text-xl font-semibold mb-4">Stage ABECEDAIRE - 1ère année</h3>
-              <p className="text-gray-300 mb-4">Période : Mai - Juin 2024</p>
-              <button className="button-style flex items-center justify-center">
-                <Download className="w-5 h-5 mr-2" />
-                Télécharger l'attestation
-              </button>
-            </div>
-            <div className="certificate-card">
-              <h3 className="text-xl font-semibold mb-4">Stage Goto IA - 2ème année</h3>
-              <p className="text-gray-300 mb-4">Période : Janvier - Février 2025</p>
-              <button className="button-style flex items-center justify-center" disabled>
-                <Download className="w-5 h-5 mr-2" />
-                Attestation à venir
-              </button>
-            </div>
+          <h2 className="text-3xl font-bold mb-12 text-center title-gradient">Réalisations professionnelles</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projects.map((project) => (
+              <div 
+                key={project.id}
+                className="hover-card overflow-hidden rounded-lg"
+              >
+                <img 
+                  src={project.image} 
+                  alt={project.title} 
+                  className="w-full h-48 object-cover"
+                />
+                <div className="p-6">
+                  <div className="text-blue-400 mb-4">{project.icon}</div>
+                  <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
+                  <p className="text-gray-300 mb-4">{project.description}</p>
+                  <div className={`${selectedProject === project.id ? 'block' : 'hidden'}`}>
+                    <p className="text-gray-300 whitespace-pre-line mb-4">{project.details}</p>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <button 
+                      onClick={() => setSelectedProject(selectedProject === project.id ? null : project.id)}
+                      className="text-blue-400 hover:text-blue-300 transition-colors flex items-center"
+                    >
+                      {selectedProject === project.id ? 'Voir moins' : 'Voir plus'}
+                      <ExternalLink className="w-4 h-4 ml-2" />
+                    </button>
+                    {project.excelFile && (
+                      <a 
+                        href={project.excelFile}
+                        download
+                        className="button-style flex items-center px-4 py-2"
+                      >
+                        <FileSpreadsheet className="w-5 h-5 mr-2" />
+                        Excel
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* News Section */}
-      <section id="news" className="py-20">
+      <section id="news" className="py-20 glass-section">
         <div className="container mx-auto px-6">
           <h2 className="text-3xl font-bold mb-12 text-center title-gradient">Actualités Réalité Virtuelle</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {news.map((item, index) => (
-              <div
-                key={index}
-                className="hover-card p-6 animate-fadeInUp"
-                style={{ animationDelay: `${index * 0.1}s` }}
+            {news.map((item) => (
+              <div 
+                key={item.id}
+                className="hover-card overflow-hidden rounded-lg"
               >
-                <span className={`inline-block px-3 py-1 rounded-full text-sm mb-4 ${item.category === "Défense" ? "bg-red-500/20 text-red-400" : "bg-green-500/20 text-green-400"
+                <img 
+                  src={item.image} 
+                  alt={item.title} 
+                  className="w-full h-48 object-cover"
+                />
+                <div className="p-6">
+                  <span className={`inline-block px-3 py-1 rounded-full text-sm mb-4 ${
+                    item.category === "Défense" ? "bg-red-500/20 text-red-400" : "bg-green-500/20 text-green-400"
                   }`}>
-                  {item.category}
-                </span>
-                <h3 className="text-lg font-semibold">{item.title}</h3>
+                    {item.category}
+                  </span>
+                  <h3 className="text-lg font-semibold mb-4">{item.title}</h3>
+                  <div className={`${selectedNews === item.id ? 'block' : 'hidden'}`}>
+                    <p className="text-gray-300 mb-4">{item.details}</p>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <button 
+                      onClick={() => setSelectedNews(selectedNews === item.id ? null : item.id)}
+                      className="text-blue-400 hover:text-blue-300 transition-colors flex items-center"
+                    >
+                      {selectedNews === item.id ? 'Voir moins' : 'Voir plus'}
+                      <ExternalLink className="w-4 h-4 ml-2" />
+                    </button>
+                    {item.downloadUrl && (
+                      <a 
+                        href={item.downloadUrl}
+                        download
+                        className="button-style flex items-center px-4 py-2"
+                      >
+                        <Download className="w-5 h-5 mr-2" />
+                        PDF
+                      </a>
+                    )}
+                  </div>
+                </div>
               </div>
             ))}
           </div>
@@ -288,7 +461,7 @@ function App() {
       <section id="contact" className="py-20 glass-section">
         <div className="container mx-auto px-6">
           <h2 className="text-3xl font-bold mb-12 text-center title-gradient">Contact</h2>
-
+          
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Information */}
             <div className="space-y-8">
@@ -296,14 +469,18 @@ function App() {
               <div className="space-y-4">
                 <div className="flex items-center space-x-4">
                   <Mail className="w-6 h-6 text-blue-400" />
-                  <span>mathieu.monnie7@gmail.com</span>
+                  <span>email@example.com</span>
+                </div>
+                <div className="flex items-center space-x-4">
+                  <Phone className="w-6 h-6 text-blue-400" />
+                  <span>+33 6 XX XX XX XX</span>
                 </div>
                 <div className="flex items-center space-x-4">
                   <MapPin className="w-6 h-6 text-blue-400" />
-                  <span>Rouen, France</span>
+                  <span>Mesnil-Esnard, France</span>
                 </div>
               </div>
-
+              
               <div className="flex space-x-6 mt-8">
                 <a href="#" className="hover-card p-4 rounded-full hover:text-blue-400 transition-colors">
                   <Linkedin className="w-6 h-6" />
@@ -324,11 +501,11 @@ function App() {
                   className="input-style"
                   placeholder="Votre nom"
                   value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  onChange={(e) => setFormData({...formData, name: e.target.value})}
                   required
                 />
               </div>
-
+              
               <div>
                 <label htmlFor="email" className="block text-sm font-medium mb-2">Email</label>
                 <input
@@ -337,11 +514,11 @@ function App() {
                   className="input-style"
                   placeholder="votre@email.com"
                   value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  onChange={(e) => setFormData({...formData, email: e.target.value})}
                   required
                 />
               </div>
-
+              
               <div>
                 <label htmlFor="message" className="block text-sm font-medium mb-2">Message</label>
                 <textarea
@@ -350,11 +527,11 @@ function App() {
                   className="input-style"
                   placeholder="Votre message"
                   value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  onChange={(e) => setFormData({...formData, message: e.target.value})}
                   required
                 ></textarea>
               </div>
-
+              
               <button type="submit" className="button-style flex items-center justify-center w-full">
                 <Send className="w-5 h-5 mr-2" />
                 Envoyer le message
