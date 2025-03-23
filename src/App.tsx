@@ -183,6 +183,150 @@ function App() {
       image: "https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&w=800&q=80",
       details: "Potentiel de la VR dans les applications militaires avancées.",
       downloadUrl: "/files/military-vr.pdf"
+    },
+    {
+      id: "news13",
+      title: "Les nouvelles voies pour traiter les troubles de stress post-traumatique",
+      category: "Santé",
+      image: "https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&w=800&q=80",
+      details: "Une approche innovante pour traiter les troubles de stress post-traumatique avec la VR.",
+      downloadUrl: "/files/military-vr.pdf"
+    },
+    {
+      id: "news14",
+      title: "La réalité virtuelle : un outil clé pour la formation des forces spéciales européennes",
+      category: "Santé",
+      image: "https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&w=800&q=80",
+      details: " EVA offre des expériences immersives où les joueurs se déplacent physiquement dans des espaces dédiés, équipés de casques VR et de répliques d'armes.",
+      downloadUrl: "/files/military-vr.pdf"
+    },
+    {
+      id: "news15",
+      title: "La France face aux guerres d’aujourd’hui et de demain",
+      category: "Défense",
+      image: "https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&w=800&q=80",
+      details: "Grâce à la VR on peut simuler des attaques.",
+      downloadUrl: "/files/military-vr.pdf"
+    },
+    {
+      id: "news16",
+      title: "Du soin à la surveillance du cerveau : la VR en neurotechnologies",
+      category: "Santé",
+      image: "https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&w=800&q=80",
+      details: "Les neurotechnologies transforment la médecine, avec des applications",
+      downloadUrl: "/files/military-vr.pdf"
+    },
+    {
+      id: "news17",
+      title: "VR DECISION, un centre de planification en réalité virtuelle pour les militaires",
+      category: "Défense",
+      image: "https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&w=800&q=80",
+      details: "Le projet VR-DECISION étudie l’analyse et le partage d’informations dans un but de planification et de prise de décision dans un environnement virtuel.",
+      downloadUrl: "/files/military-vr.pdf"
+    },
+    {
+      id: "news18",
+      title: " La santé en 2024 : les plus grandes avancées médicales avec la VR ",
+      category: "Santé",
+      image: "https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&w=800&q=80",
+      details: "De la recherche sur de nouveaux médicaments pour la perte de poids à l'impact de la réalité virtuelle en médecine",
+      downloadUrl: "/files/military-vr.pdf"
+    },
+    {
+      id: "news19",
+      title: "VR comme technologie militaire",
+      category: "Défense",
+      image: "https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&w=800&q=80",
+      details: "Potentiel de la VR dans les applications militaires avancées.",
+      downloadUrl: "/files/military-vr.pdf"
+    },
+    {
+      id: "news20",
+      title: "VR comme technologie militaire",
+      category: "Défense",
+      image: "https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&w=800&q=80",
+      details: "Potentiel de la VR dans les applications militaires avancées.",
+      downloadUrl: "/files/military-vr.pdf"
+    },
+    {
+      id: "news21",
+      title: "VR comme technologie militaire",
+      category: "Défense",
+      image: "https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&w=800&q=80",
+      details: "Potentiel de la VR dans les applications militaires avancées.",
+      downloadUrl: "/files/military-vr.pdf"
+    },
+    {
+      id: "news22",
+      title: "VR comme technologie militaire",
+      category: "Défense",
+      image: "https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&w=800&q=80",
+      details: "Potentiel de la VR dans les applications militaires avancées.",
+      downloadUrl: "/files/military-vr.pdf"
+    },
+    {
+      id: "news23",
+      title: "VR comme technologie militaire",
+      category: "Défense",
+      image: "https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&w=800&q=80",
+      details: "Potentiel de la VR dans les applications militaires avancées.",
+      downloadUrl: "/files/military-vr.pdf"
+    },
+    {
+      id: "news24",
+      title: "VR comme technologie militaire",
+      category: "Défense",
+      image: "https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&w=800&q=80",
+      details: "Potentiel de la VR dans les applications militaires avancées.",
+      downloadUrl: "/files/military-vr.pdf"
+    },
+    {
+      id: "news25",
+      title: "VR comme technologie militaire",
+      category: "Défense",
+      image: "https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&w=800&q=80",
+      details: "Potentiel de la VR dans les applications militaires avancées.",
+      downloadUrl: "/files/military-vr.pdf"
+    },
+    {
+      id: "news26",
+      title: "VR comme technologie militaire",
+      category: "Défense",
+      image: "https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&w=800&q=80",
+      details: "Potentiel de la VR dans les applications militaires avancées.",
+      downloadUrl: "/files/military-vr.pdf"
+    },
+    {
+      id: "news27",
+      title: "VR comme technologie militaire",
+      category: "Défense",
+      image: "https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&w=800&q=80",
+      details: "Potentiel de la VR dans les applications militaires avancées.",
+      downloadUrl: "/files/military-vr.pdf"
+    },
+    {
+      id: "news28",
+      title: "VR comme technologie militaire",
+      category: "Défense",
+      image: "https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&w=800&q=80",
+      details: "Potentiel de la VR dans les applications militaires avancées.",
+      downloadUrl: "/files/military-vr.pdf"
+    },
+    {
+      id: "news29",
+      title: "VR comme technologie militaire",
+      category: "Défense",
+      image: "https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&w=800&q=80",
+      details: "Potentiel de la VR dans les applications militaires avancées.",
+      downloadUrl: "/files/military-vr.pdf"
+    },
+    {
+      id: "news30",
+      title: "VR comme technologie militaire",
+      category: "Défense",
+      image: "https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&w=800&q=80",
+      details: "Potentiel de la VR dans les applications militaires avancées.",
+      downloadUrl: "/files/military-vr.pdf"
     }
   ];
 
